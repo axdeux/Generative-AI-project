@@ -6,4 +6,5 @@ This here project be a grand adventure into the unknown, usin' the dark arts of 
 
 
 Code structure:
+
 ![](./figures/genAI_codeflow.png)
