@@ -99,15 +99,12 @@ chain = LLMChain(
 # first_suggestion = chain.run(name = "Empty", type = "fire", secondary_type = "religious", tag = "The popemobile")
 
 
-inp = input("Describe the pokemon you want to create: ")
-
-suggestion = chain.run(User_description = inp)
-print(suggestion)
-Name = suggestion[0].split(":")[1].strip()
-Type = suggestion[1].split(":")[1].strip()
-Description = suggestion[2].split(":")[1].strip()
-Real_World_Comparison = suggestion[3].split(":")[1].strip()
-Visual_Description = suggestion[4].split(":")[1].strip()
-Signature_Cry = suggestion[5].split(":")[1].strip()
-
-print("Visual_description: ", Visual_Description)
+def generate_prompt(prompt):
+    suggestion = chain.run(User_description = prompt)
+    Name = suggestion[0].split(":")[1].strip()
+    Type = suggestion[1].split(":")[1].strip()
+    Description = suggestion[2].split(":")[1].strip()
+    Real_World_Comparison = suggestion[3].split(":")[1].strip()
+    Visual_Description = suggestion[4].split(":")[1].strip()
+    Signature_Cry = suggestion[5].split(":")[1].strip()
+    return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_Cry
