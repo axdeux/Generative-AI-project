@@ -16,7 +16,7 @@ def get_diffusion_pipeline():
     return pipe
 
 
-def generate_audio(pipe, text):
+def generate_audio(text):
 
     prompt_template = f"""The following is a specification for a Pokemon. You are to create the sound of the pokemon according to the description.
 
@@ -24,6 +24,7 @@ def generate_audio(pipe, text):
     {text}
     """
 
+    pipe = get_diffusion_pipeline()
     # Generate the audio
     output = pipe(prompt_template, num_inference_steps=50, guidance_scale=7.5)
 
