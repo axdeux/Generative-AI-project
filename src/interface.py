@@ -4,27 +4,30 @@ from tkinter import Entry
 from PIL import ImageTk, Image
 import pygame
 
-from image_model import generate_image
+import image_model as im
 from prompt_model import generate_prompt
-from sound_model import generate_audio
+import sound_model as sm
 from scipy.io.wavfile import write as wav_write
 import numpy as np
 
 class DexApp:
     def __init__(self, master):
         self.master = master
-        self.master.title("Sound Player")
+        self.master.title(f"AI Dex")
         self.current_folder = 0
-        self.folders = sorted(os.listdir("pokemons/"))  # assuming your folders are in a directory named "data"
+        self.curr_dir = os.path.dirname(os.path.realpath(__file__))
+        self.folders = sorted(os.listdir(self.curr_dir+"/pokemons/"))  # assuming your folders are in a directory named "data"
         self.load_data()
         self.create_widgets()
 
+        
+
     def load_data(self):
-        folder_path = os.path.join("pokemons", self.folders[self.current_folder])
+        folder_path = self.curr_dir+os.path.join("/pokemons", self.folders[self.current_folder])
         self.name = self.folders[self.current_folder]
         self.image_path = os.path.join(folder_path, "pokemon.png")
         self.description_path = os.path.join(folder_path, "type_description.txt")
-        self.sound_path = os.path.join(folder_path, "sound.wav")
+        self.sound_path = os.path.join(folder_path)
 
     def create_widgets(self):
         self.image_label = tk.Label(self.master)
@@ -44,10 +47,10 @@ class DexApp:
         self.previous_button.grid(row=2, column=0, sticky="W")
 
         self.prompt_entry = Entry(self.master)
-        self.prompt_entry.grid(row=3, column=1, sticky="W")
+        self.prompt_entry.grid(row=3, column=0, sticky="E")
 
         self.generate_button = tk.Button(self.master, text="Generate New Pokemon", command= lambda: self.generate_new_pokemon(self.prompt_entry.get()))
-        self.generate_button.grid(row=3, column=0, sticky="E")
+        self.generate_button.grid(row=3, column=1, sticky="W")
 
         self.update_display()
 
@@ -73,7 +76,7 @@ class DexApp:
 
     def play_sound(self):
         pygame.mixer.init()
-        pygame.mixer.music.load(self.sound_path)
+        pygame.mixer.music.load(self.sound_path+f"/sound{np.random.randint(1, 4)}.wav")
         pygame.mixer.music.play()
 
     def next_object(self):
@@ -87,7 +90,7 @@ class DexApp:
         self.update_display()
 
     def generate_new_pokemon(self, prompt=None):
-        folder = "pokemons/"
+        folder = "src/pokemons/"
         if not os.path.exists(folder):
             os.makedirs(folder)
 
@@ -99,22 +102,24 @@ class DexApp:
         if not os.path.exists(pokemon_folder):
             os.makedirs(pokemon_folder)
 
-        type_description = f"{ptype}\n {desc}\n {rw_compar}"
+        type_description = f"{ptype}\n {desc}\n {rw_compar}\n{visual_prompt}\n{audio_prompt}"
         np.savetxt(pokemon_folder+"type_description.txt", [type_description], fmt="%s")
 
 
         # print(f"Name: {name}\nType: {ptype}\nDescription: {desc}\nR/W Comparison: {rw_compar}")
-
-        image = generate_image(visual_prompt)
+        self.image_pipe = im.get_pipeline()
+        image = im.generate_image(self.image_pipe, visual_prompt)
         image.save(pokemon_folder+"pokemon.png")
 
-        audio = generate_audio(audio_prompt)
-        wav_write(pokemon_folder+"sound.wav", 16000, audio)
+        del self.image_pipe
 
-        self.folders = sorted(os.listdir("pokemons/"))
+        self.sound_pipe = sm.get_pipeline()
+        audio = sm.generate_audio(self.sound_pipe, audio_prompt)
+        for ind, aud in enumerate(audio):
+            wav_write(pokemon_folder+f"sound{ind+1}.wav", 16000, aud)
+
+        del self.sound_pipe
+
+        self.folders = sorted(os.listdir(folder))
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = DexApp(root)
-    root.mainloop()
