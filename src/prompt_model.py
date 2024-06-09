@@ -27,7 +27,7 @@ Type: This identifies the primary elemental attribute of the Pokémon, such as E
 
 Description: This section provides a brief narrative about the Pokémon, including its evolutionary information, its role or significance within the Pokémon world, and any notable characteristics or abilities it possesses. This helps in understanding the Pokémon's background and its capabilities.
 Real World Comparison: This is a one-word tag that draws a parallel between the Pokémon and a real-world animal or item. It helps to quickly associate the Pokémon's appearance or characteristics with something familiar, making it easier for someone unfamiliar with Pokémon to visualize and understand the creature.
-Visual Description: This detailed description focuses on the physical appearance of the Pokémon. It includes information about the Pokémon's color, body shape, and any distinctive features. This is particularly useful for artists or anyone trying to imagine or create a visual representation of the Pokémon.
+Visual Description: This detailed description focuses on the physical appearance of the Pokémon. It includes information about the Pokémon's color, body shape, and any distinctive features. This is particularly useful for artists or anyone trying to imagine or create a visual representation of the Pokémon. Should only contain keywords.
 
 Signature Cry: Every Pokémon has a unique sound or cry that it makes, which can be heard in the games or the anime. This section describes the nature of that sound, providing insight into the personality or elemental nature of the Pokémon. The description of the cry often includes auditory elements that suggest how it might sound, which adds to the immersive experience of understanding the Pokémon.
 
@@ -36,7 +36,7 @@ Name: Squirtle
 |Type: Water
 |Description: Squirtle is a Water-type Pokémon that resembles a small turtle. It can evolve into Wartortle and eventually into Blastoise, gaining more power and bulk with each evolution.
 |Real World Comparison: Turtle
-|Visual Description: Squirtle has a smooth, blue skin with a cream-colored underside and a shell that is a darker shade of blue. Its eyes are large and it has a small, smiling mouth, giving it a friendly appearance. The tail is small and curly.
+|Visual Description Keywords: smooth blue skin, cream underside, dark blue shell, large eyes, smiling mouth, small curly tail
 |Signature Cry: Squirtle's cry is a bubbly and watery sound, reflecting its aquatic nature, typically a soft trilling that is soothing.
 
 
@@ -44,28 +44,28 @@ Name: Mewtwo
 |Type: Psychic
 |Description: Mewtwo is a legendary Psychic-type Pokémon created from the DNA of Mew, one of the rarest Pokémon. It is known for its incredible psychic abilities and is often regarded as one of the most powerful Pokémon.
 |Real World Comparison: Feline
-|Visual Description: Mewtwo stands upright and has a sleek, humanoid body covered in pale purple fur. Its eyes are bright purple, and it has a long, thin tail. Its structure is muscular yet streamlined for agility.
+|Visual Description Keywords: sleek humanoid body, pale purple fur, bright purple eyes, long thin tail, muscular, streamlined
 |Signature Cry: Mewtwo's cry is deep and telepathic-sounding, often resonating with a metallic echo, reflecting its mysterious and formidable nature.
 
 Name: Blastoise
 |Type: Water
 |Description: Blastoise is the final evolutionary stage of Squirtle, following Wartortle. Known for the powerful water cannons on its back, Blastoise can shoot water with enough force to penetrate steel.
 |Real World Comparison: Tortoise
-|Visual Description: Blastoise is a large, bipedal turtle with a massive, blue shell featuring two powerful water cannons. It has a rugged, blue body, small brown eyes, and a serious expression on its face.
+|Visual Description Keywords: large bipedal turtle, massive blue shell, water cannons, rugged blue body, small brown eyes, serious expression
 |Signature Cry: Blastoise has a deep, roaring cry, similar to the sound of a cannon firing, which is intimidating and powerful.
 
 Name: Treecko
 |Type: Grass
 |Description: Treecko, a Grass-type Pokémon, is known for its cool demeanor and is the first stage in its evolutionary line, leading to Grovyle and then Sceptile. It has abilities that allow it to scale vertical walls.
 |Real World Comparison: Gecko
-|Visual Description: Treecko is small and sleek, primarily green with a light underskin and a long, curled tail. It has large, yellow eyes and feet that are big compared to its body, adapted for climbing.
+|Visual Description Keywords: small sleek, green, light underside, long curled tail, large yellow eyes, big feet
 |Signature Cry: Treecko's cry is sharp and quick, similar to a chirp, which reflects its alert and agile nature.
 
 Name: Rayquaza
 |Type: Dragon / Flying
 |Description: Rayquaza is a legendary Pokémon that is part of the weather trio, along with Kyogre and Groudon. It has the ability to calm the other two members of the trio. It is known for living in the ozone layer and rarely descending to the ground.
 |Real World Comparison: Serpent
-|Visual Description: Rayquaza is a long, serpentine creature with a green body and yellow patterns that run along its length. It has an imposing presence with sharp, red eyes and fins along its body that give it a majestic and fearsome look.
+|Visual Description Keywords: long serpentine body, green scales, yellow patterns, sharp red eyes, fins along body, majestic, fearsome.
 |Signature Cry: Rayquaza's cry is a majestic and echoing roar, powerful enough to be heard across great distances, resonating through the skies.
 
 Please define the pokemon from the following user provided input: {User_description}
@@ -108,3 +108,6 @@ def generate_prompt(prompt):
     Visual_Description = suggestion[4].split(":")[1].strip()
     Signature_Cry = suggestion[5].split(":")[1].strip()
     return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_Cry
+
+
+# print(generate_prompt("A small, yellow, electric mouse with red cheeks and a long, thin tail."))
