@@ -30,10 +30,10 @@ def generate_audio(text):
 
     return output.audios[0]
 
-if __name__ == "__main__":
-    audio_file = Path("output.wav")
-    pipe = get_diffusion_pipeline()
-    text = "A small, cute, and fluffy Pokemon with a high-pitched voice."
-    audio = generate_audio(pipe, text)
-    wav_write(audio_file, 16000, audio)
-    print(f"Audio saved to {audio_file}")
+# if __name__ == "__main__":
+#     audio_file = Path("output.wav")
+#     pipe = get_diffusion_pipeline()
+#     text = "A small, cute, and fluffy Pokemon with a high-pitched voice."
+#     audio = generate_audio(pipe, text)
+#     wav_write(audio_file, 16000, audio)
+#     print(f"Audio saved to {audio_file}")
