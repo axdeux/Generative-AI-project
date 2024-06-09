@@ -9,7 +9,7 @@ def get_pipeline():
     """Get the pretrained AudioLDM2 pipeline."""
 
     pipe = (
-        AudioLDM2Pipeline()
+        AudioLDM2Pipeline
         .from_pretrained("cvssp/audioldm2", torch_dtype=torch.float16)
         .to("cuda" if torch.cuda.is_available() else "cpu")
     )
@@ -36,7 +36,7 @@ def generate_audio(pipe, prompt, negative_prompt=None, generator=None):
     audio = pipe(
         prompt=prompt,
         negative_prompt=negative_prompt,
-        num_inference_steps=200,
+        num_inference_steps=100,
         audio_length_in_s=10.0,
         num_waveforms_per_prompt=3,
         generator=generator,

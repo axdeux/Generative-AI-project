@@ -13,7 +13,7 @@ def get_pipeline():
     """
 
     pipe = (
-        StableDiffusionXLPipeline()
+        StableDiffusionXLPipeline
         .from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16
         )
@@ -44,13 +44,15 @@ def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
 
     pipe.enable_attention_slicing()
 
+    if generator is None:
+        generator = torch.Generator("cuda").manual_seed(69)
+
     image = pipe(
-        visual_prompt,
+        positive_promt,
         negative_promt=negative_promt,
         num_inference_steps=20,
         generator=generator,
-        num_images_per_prompt=1,
-    ).images
+    ).images[0]
 
     return image
 
