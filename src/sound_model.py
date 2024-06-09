@@ -1,39 +1,58 @@
 from pathlib import Path
 
 import torch
-from diffusers import DiffusionPipeline
+from diffusers import AudioLDM2Pipeline
 from scipy.io.wavfile import write as wav_write
 
 
-def get_diffusion_pipeline():
-    # Load the pretrained model
+def get_pipeline():
+    """Get the pretrained AudioLDM2 pipeline."""
+
     pipe = (
-        DiffusionPipeline()
-        .from_pretrained("cvssp/audioldm2")
+        AudioLDM2Pipeline()
+        .from_pretrained("cvssp/audioldm2", torch_dtype=torch.float16)
         .to("cuda" if torch.cuda.is_available() else "cpu")
     )
 
     return pipe
 
 
-def generate_audio(text):
+def generate_audio(pipe, prompt, negative_prompt=None, generator=None):
+    """Generate audio from the given prompt.
 
-    prompt_template = f"""The following is a specification for a Pokemon. You are to create the sound of the pokemon according to the description.
+    Args:
+        pipe (AudioLDM2Pipeline): The pretrained AudioLDM2 pipeline.
+        prompt (str): The prompt to generate audio from.
+        negative_prompt (str): The negative prompt to generate audio from.
 
-    Description:
-    {text}
+    Returns:
+        numpy.ndarray: The generated audio.
     """
 
-    pipe = get_diffusion_pipeline()
+    if generator is None:
+        generator = torch.Generator("cuda").manual_seed(69)
+
     # Generate the audio
-    output = pipe(prompt_template, num_inference_steps=50, guidance_scale=7.5)
+    audio = pipe(
+        prompt=prompt,
+        negative_prompt=negative_prompt,
+        num_inference_steps=200,
+        audio_length_in_s=10.0,
+        num_waveforms_per_prompt=3,
+        generator=generator,
+    ).audios
 
-    return output.audios[0]
+    return audio
 
-# if __name__ == "__main__":
-#     audio_file = Path("output.wav")
-#     pipe = get_diffusion_pipeline()
-#     text = "A small, cute, and fluffy Pokemon with a high-pitched voice."
-#     audio = generate_audio(pipe, text)
-#     wav_write(audio_file, 16000, audio)
-#     print(f"Audio saved to {audio_file}")
+
+if __name__ == "__main__":
+    pipe = get_pipeline()
+
+    prompt = "A small, cute, and fluffy Pokemon with a high-pitched voice."
+    neg_prompt = "A large, scary, and intimidating Pokemon with a deep voice."
+
+    audio = generate_audio(pipe, prompt, neg_prompt)
+
+    audio_file = Path("output.wav")
+    wav_write(audio_file, 16000, audio)
+    print(f"Audio saved to {audio_file}")
