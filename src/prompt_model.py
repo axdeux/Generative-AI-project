@@ -89,17 +89,19 @@ class CommaSeparatedParser(BaseOutputParser):
         output = [o.strip() for o in output]
         return output
     
-chain = LLMChain(
-    llm=agent,
-    prompt=template,
-    output_parser=CommaSeparatedParser(),
-    verbose=True)
+
 
 
 # first_suggestion = chain.run(name = "Empty", type = "fire", secondary_type = "religious", tag = "The popemobile")
 
 
 def generate_prompt(prompt):
+    chain = LLMChain(
+        llm=agent,
+        prompt=template,
+        output_parser=CommaSeparatedParser(),
+        verbose=True)
+    
     suggestion = chain.run(User_description = prompt)
     Name = suggestion[0].split(":")[1].strip()
     Type = suggestion[1].split(":")[1].strip()
@@ -107,4 +109,7 @@ def generate_prompt(prompt):
     Real_World_Comparison = suggestion[3].split(":")[1].strip()
     Visual_Description = suggestion[4].split(":")[1].strip()
     Signature_Cry = suggestion[5].split(":")[1].strip()
+
+    del chain
+
     return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_Cry
