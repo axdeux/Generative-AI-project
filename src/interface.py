@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import Entry
 from PIL import ImageTk, Image
 import pygame
+import torch
 
 import image_model as im
 from prompt_model import generate_prompt
@@ -17,6 +18,7 @@ class DexApp:
         self.current_folder = 0
         self.curr_dir = os.path.dirname(os.path.realpath(__file__))
         self.folders = sorted(os.listdir(self.curr_dir+"/pokemons/"))  # assuming your folders are in a directory named "data"
+        self.available_device = "cuda (recommended)" if torch.cuda.is_available() else "CPU (recommend using GPU)"
         self.load_data()
         self.create_widgets()
 
@@ -52,6 +54,12 @@ class DexApp:
         self.generate_button = tk.Button(self.master, text="Generate New Pokemon", command= lambda: self.generate_new_pokemon(self.prompt_entry.get()))
         self.generate_button.grid(row=3, column=1, sticky="W")
 
+        self.device_label = tk.Label(self.master, text=f"Device: {self.available_device}")
+        self.device_label.grid(row=4, column=0, sticky="W")
+
+        self.prompt_text = tk.Label(self.master, text="Optional description prompt:")
+        self.prompt_text.grid(row=3, column=0, sticky="W")
+
         self.update_display()
 
     def update_display(self):
@@ -73,6 +81,7 @@ class DexApp:
         display_text = f"Name: {self.name}\n\n\nType: {self.type_description}\n\n\nDescription: {self.description}\n\nReal-world comparison: {self.rw_compare}"
 
         self.description_label.config(text=display_text)
+
 
     def play_sound(self):
         pygame.mixer.init()
