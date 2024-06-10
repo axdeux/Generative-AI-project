@@ -73,8 +73,6 @@ Please define the pokemon from the following user provided input: {User_descript
 
 IMPORTANT! Make sure the generated information is consistent with all the input information such as the types and real world comparison.
 """
-#Kan legge til flere eksempler for å forbedre formateringen.
-
 
 template = PromptTemplate(
     template=template,
@@ -88,10 +86,6 @@ class CommaSeparatedParser(BaseOutputParser):
         output = [o.strip() for o in output]
         return output
     
-
-
-
-# first_suggestion = chain.run(name = "Empty", type = "fire", secondary_type = "religious", tag = "The popemobile")
 
 
 def generate_prompt(prompt):
@@ -112,6 +106,3 @@ def generate_prompt(prompt):
     del chain
 
     return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_Cry
-
-
-# print(generate_prompt("A small, yellow, electric mouse with red cheeks and a long, thin tail."))
