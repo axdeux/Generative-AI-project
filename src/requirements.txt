@@ -54,8 +54,6 @@ tbb==2021.12.0
 tenacity==8.3.0
 tiktoken==0.7.0
 tokenizers==0.19.1
-torch==2.3.1+cu118
-torchvision==0.18.1+cu118
 tqdm==4.66.4
 transformers==4.41.2
 typing_extensions==4.12.2
