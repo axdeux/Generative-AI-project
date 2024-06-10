@@ -28,8 +28,7 @@ Type: This identifies the primary elemental attribute of the Pokémon, such as E
 Description: This section provides a brief narrative about the Pokémon, including its evolutionary information, its role or significance within the Pokémon world, and any notable characteristics or abilities it possesses. This helps in understanding the Pokémon's background and its capabilities.
 Real World Comparison: This is a one-word tag that draws a parallel between the Pokémon and a real-world animal or item. It helps to quickly associate the Pokémon's appearance or characteristics with something familiar, making it easier for someone unfamiliar with Pokémon to visualize and understand the creature.
 Visual Description: This detailed description focuses on the physical appearance of the Pokémon. It includes information about the Pokémon's color, body shape, and any distinctive features. This is particularly useful for artists or anyone trying to imagine or create a visual representation of the Pokémon. Should only contain keywords.
-
-Signature Cry: Every Pokémon has a unique sound or cry that it makes, which can be heard in the games or the anime. This section describes the nature of that sound, providing insight into the personality or elemental nature of the Pokémon. The description of the cry often includes auditory elements that suggest how it might sound, which adds to the immersive experience of understanding the Pokémon.
+Sound Prompt: Each Pokémon cry is distinct and characteristic, with a sound that matches its type and personality. The cry should have a unique pitch and tone, reflecting the Pokémon's physical traits and abilities, and be memorable and easily identifiable, evoking the essence of the Pokémon.
 
 Examples of already existing pokemon. Use | to separate the categories for the output formating.
 Name: Squirtle
@@ -37,7 +36,7 @@ Name: Squirtle
 |Description: Squirtle is a Water-type Pokémon that resembles a small turtle. It can evolve into Wartortle and eventually into Blastoise, gaining more power and bulk with each evolution.
 |Real World Comparison: Turtle
 |Visual Description Keywords: smooth blue skin, cream underside, dark blue shell, large eyes, smiling mouth, small curly tail
-|Signature Cry: Squirtle's cry is a bubbly and watery sound, reflecting its aquatic nature, typically a soft trilling that is soothing.
+|Sound Prompt: A deep, resonant cry with a telepathic quality, metallic echo, mysterious and powerful, emphasizing its psychic abilities and formidable presence.
 
 
 Name: Mewtwo
@@ -45,7 +44,7 @@ Name: Mewtwo
 |Description: Mewtwo is a legendary Psychic-type Pokémon created from the DNA of Mew, one of the rarest Pokémon. It is known for its incredible psychic abilities and is often regarded as one of the most powerful Pokémon.
 |Real World Comparison: Feline
 |Visual Description Keywords: sleek humanoid body, pale purple fur, bright purple eyes, long thin tail, muscular, streamlined
-|Signature Cry: Mewtwo's cry is deep and telepathic-sounding, often resonating with a metallic echo, reflecting its mysterious and formidable nature.
+|Sound Prompt: A deep, roaring sound akin to a cannon firing, powerful and intimidating, reflecting its rugged strength and water cannons.
 
 Name: Blastoise
 |Type: Water
@@ -59,16 +58,16 @@ Name: Treecko
 |Description: Treecko, a Grass-type Pokémon, is known for its cool demeanor and is the first stage in its evolutionary line, leading to Grovyle and then Sceptile. It has abilities that allow it to scale vertical walls.
 |Real World Comparison: Gecko
 |Visual Description Keywords: small sleek, green, light underside, long curled tail, large yellow eyes, big feet
-|Signature Cry: Treecko's cry is sharp and quick, similar to a chirp, which reflects its alert and agile nature.
+|Sound Prompt: A sharp, quick chirping sound, alert and agile, capturing its swift movements and tree-climbing abilities, reflecting its keen and nimble nature.
 
 Name: Rayquaza
 |Type: Dragon / Flying
 |Description: Rayquaza is a legendary Pokémon that is part of the weather trio, along with Kyogre and Groudon. It has the ability to calm the other two members of the trio. It is known for living in the ozone layer and rarely descending to the ground.
 |Real World Comparison: Serpent
 |Visual Description Keywords: long serpentine body, green scales, yellow patterns, sharp red eyes, fins along body, majestic, fearsome.
-|Signature Cry: Rayquaza's cry is a majestic and echoing roar, powerful enough to be heard across great distances, resonating through the skies.
+|Sound Prompt: A majestic, echoing roar, powerful and resonating through the skies, capturing its legendary status and serpentine form, conveying both awe and fear.
 
-Please define the pokemon from the following user provided input: {User_description}
+Please define the pokemon from the following user provided input: {User_description}. If blank, make up a new pokemon.
 
 
 
