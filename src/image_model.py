@@ -22,7 +22,7 @@ def get_pipeline():
     return pipe
 
 
-def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
+def generate_image(pipe, visual_prompt, negative_prompt=None, generator=None):
     """
     Function for generating an image given a visual prompt, based on StableDiffusionXL model.
 
@@ -36,10 +36,11 @@ def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
         image (PIL.Image): The generated image.
     """
 
-    positive_promt = "Pokemon and cartoon style."
-    negative_promt = "3d, realistic"
+    positive_prompt = "Pokemon and cartoon style."
+    if negative_prompt is None:
+        negative_prompt = "3d, realistic"
 
-    positive_promt += visual_prompt
+    positive_prompt += visual_prompt
 
     #Enable attention slicing for better performance, uses less GPU memory. 
     pipe.enable_attention_slicing()
@@ -48,8 +49,8 @@ def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
         generator = torch.Generator("cuda").manual_seed(69)
 
     image = pipe(
-        positive_promt,
-        negative_promt=negative_promt,
+        positive_prompt,
+        negative_promt=negative_prompt,
         num_inference_steps=20,
         generator=generator,
     ).images[0]

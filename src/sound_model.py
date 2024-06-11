@@ -17,7 +17,7 @@ def get_pipeline():
     return pipe
 
 
-def generate_audio(pipe, prompt, negative_prompt=None, generator=None):
+def generate_audio(pipe, auditory_prompt, negative_prompt=None, generator=None):
     """Generate audio from the given prompt.
 
     Args:
@@ -31,10 +31,16 @@ def generate_audio(pipe, prompt, negative_prompt=None, generator=None):
 
     if generator is None:
         generator = torch.Generator("cuda").manual_seed(69)
+    
+    positive_prompt = "Vocalization from an animal."
+    if negative_prompt is None:
+        negative_prompt = "Hum, background, noise, enviroment, Static, flat, monotonous, hums, lifeless, dull, repetitive, droning"
+
+    positive_prompt += auditory_prompt
 
     # Generate the audio
     audio = pipe(
-        prompt=prompt,
+        prompt=positive_prompt,
         negative_prompt=negative_prompt,
         num_inference_steps=100,
         audio_length_in_s=4.0,
