@@ -5,11 +5,13 @@ from business_secrets import API_KEY
 from langchain.schema import BaseOutputParser
 import numpy as np
 
-api_version = "2023-12-01-preview"
+api_version = "2023-12-01-preview" 
 endpoint = "https://gpt-course.openai.azure.com/"
 
+#Specify which gpt model to use. As it is the best model we have access to.
 deployment_name = "gpt-4"
 
+#Initialising the model agent. This specifies the model to use, the api version, the endpoint, the api key, and the deployment name.
 agent = AzureChatOpenAI(
     api_version=api_version, 
     azure_endpoint=endpoint,
@@ -18,7 +20,8 @@ agent = AzureChatOpenAI(
 )
 
 
-
+#The template is the prompt that is fed into the model. It defines what we want the model to produce, as well as the format of the output.
+#Also define input variables in the prompt 
 template = """
 Generate a new pokemon. Using the given information. A new requires the following information, generate the missing information. Make sure that the generated information is consistent with the other pieces of information. 
 Name: The name of the pokemon. 
@@ -73,14 +76,17 @@ Please define the pokemon from the following user provided input: {User_descript
 IMPORTANT! Make sure the generated information is consistent with all the input information such as the types and real world comparison.
 """
 
+#The prompt template is a wrapper around the template that allows us to pass in variables to the template.
 template = PromptTemplate(
     template=template,
     input_variables=["User_description"], 
 )
 
+#Parsing the output of the model so we can access the different output, such as the name, description, prompts for different models, etc.
 from langchain.schema import BaseOutputParser
 class CommaSeparatedParser(BaseOutputParser):
     def parse(self, text):
+        #Splitting the output by the "|" character to get the different categories.
         output = text.strip().split('|')
         output = [o.strip() for o in output]
         return output
@@ -88,6 +94,17 @@ class CommaSeparatedParser(BaseOutputParser):
 
 
 def generate_prompt(prompt):
+    """
+    Function input a prompt, which is applied to the template and fed into the model.
+    The function returns the a generated pokemon that has the variables
+    name,
+    type,
+    description, 
+    real world comparison, 
+    visual description/prompt for image model, 
+    signature call/prompt for audio model.
+    """
+    #Creating a model chain that takes the agent, the prompt, and the output parser.
     chain = LLMChain(
         llm=agent,
         prompt=template,
@@ -95,6 +112,7 @@ def generate_prompt(prompt):
         verbose=True)
     
     suggestion = chain.run(User_description = prompt)
+    #Splitting the output into the different categories. Separating by ":" character to get what is after the category name.
     Name = suggestion[0].split(":")[1].strip()
     Type = suggestion[1].split(":")[1].strip()
     Description = suggestion[2].split(":")[1].strip()
@@ -102,6 +120,7 @@ def generate_prompt(prompt):
     Visual_Description = suggestion[4].split(":")[1].strip()
     Signature_call = suggestion[5].split(":")[1].strip()
 
+    #Delete the model chain to stop cuda memory error.
     del chain
 
     return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_call
