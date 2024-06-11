@@ -27,3 +27,8 @@ In the interface, there are 4 buttons. The "play sound" button plays 1 of 3 gene
 
 
 To run the AI Dex program, clone this repository and run the line "python src/main.py" from the Generative-AI-project directory in the terminal, after installing the required packages.
+
+
+Below is a recording of our AI Dex interface, where we quickly peruse some previously generated pokemon-like creatures, and generate a new one. We play some of its sounds at the end, note that one of the sounds is a load screech, due to the lack of performance of our sound synthesis model.
+
+[![Watch the video](./figures/example.png)](./figures/AI_Dex_recording.mp4)
