@@ -4,7 +4,7 @@ from langchain.prompts import PromptTemplate
 from business_secrets import API_KEY
 from langchain.schema import BaseOutputParser
 import numpy as np
-
+#Inspired by the code from the lectures on langchain.
 api_version = "2023-12-01-preview" 
 endpoint = "https://gpt-course.openai.azure.com/"
 

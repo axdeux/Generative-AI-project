@@ -11,7 +11,6 @@ def get_pipeline():
     Returns:
         pipe (StableDiffusionXLPipeline): The StableDiffusionXL model pipeline.
     """
-
     pipe = (
         StableDiffusionXLPipeline
         .from_pretrained(
@@ -28,20 +27,21 @@ def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
     Function for generating an image given a visual prompt, based on StableDiffusionXL model.
 
     Args:
+        pipe (StableDiffusionXLPipeline): The StableDiffusionXL model pipeline.
         visual_prompt (str): A visual prompt for generating the image.
+        negative_promt (str): A negative prompt for the image generation, defaults to None.
+        generator (torch.Generator): A torch random generator, defaults to None.
 
     Returns:
         image (PIL.Image): The generated image.
     """
-    # print("--------------------------")
-    # print("Prompt: ", visual_prompt)
-    # print("--------------------------")
 
     positive_promt = "Pokemon and cartoon style."
     negative_promt = "3d, realistic"
 
     positive_promt += visual_prompt
 
+    #Enable attention slicing for better performance, uses less GPU memory. 
     pipe.enable_attention_slicing()
 
     if generator is None:
@@ -56,7 +56,7 @@ def generate_image(pipe, visual_prompt, negative_promt=None, generator=None):
 
     return image
 
-
+#Enable running the script directly to generate an image with the given prompt.
 if __name__ == "__main__":
     pipe = get_pipeline()
 
