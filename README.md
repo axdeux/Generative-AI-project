@@ -15,7 +15,7 @@ AI dex backend structure:
 Known issues:
 The sound generator does not generate reasonable sounds. We have repeatedly tried to optimize the inputs, and changing the model itself, to no avail.
 
-Generating a new pokemon takes time. On our machine, with the given packages and versions, it tabkes about 3 minutes to generate a new pokemon. This is why we recommend using GPU for this.
+Generating a new pokemon takes time. On our machine, with the given packages and versions, it takes about 3 minutes to generate a new pokemon, with cuda enabled. We recommend using GPU to generate new pokemons, as without it, it can take up to 20 minutes.
 
 The AI dex interface freezes during the creation of a new AI generated pokemon.
 
