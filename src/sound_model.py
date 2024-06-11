@@ -32,9 +32,9 @@ def generate_audio(pipe, auditory_prompt, negative_prompt=None, generator=None):
     if generator is None:
         generator = torch.Generator("cuda").manual_seed(69)
     
-    positive_prompt = "Vocalization from an animal."
+    positive_prompt = "A single burst of sound, representing vocalization from a pokemon."
     if negative_prompt is None:
-        negative_prompt = "Hum, background, noise, enviroment, Static, flat, monotonous, hums, lifeless, dull, repetitive, droning"
+        negative_prompt = "Hum, background, noise, enviroment, Static, flat, monotonous, hums, lifeless, dull, repetitive, droning, continous, repeating, long."
 
     positive_prompt += auditory_prompt
 
@@ -43,8 +43,9 @@ def generate_audio(pipe, auditory_prompt, negative_prompt=None, generator=None):
         prompt=positive_prompt,
         negative_prompt=negative_prompt,
         num_inference_steps=100,
-        audio_length_in_s=4.0,
+        audio_length_in_s=3.0,
         num_waveforms_per_prompt=3,
+        guidance_scale=6.0,
         generator=generator,
     ).audios
 
