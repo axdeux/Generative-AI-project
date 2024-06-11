@@ -31,4 +31,4 @@ To run the AI Dex program, clone this repository and run the line "python src/ma
 
 Below is a recording of our AI Dex interface, where we quickly peruse some previously generated pokemon-like creatures, and generate a new one. We play some of its sounds at the end, note that one of the sounds is a load screech, due to the lack of performance of our sound synthesis model.
 
-[![Watch the video](./figures/example.png)](https://www.youtube.com/watch?v=hv-6xhEqp4M)
+[![Watch the video](./figures/click_here.png)](https://www.youtube.com/watch?v=hv-6xhEqp4M)
