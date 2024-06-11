@@ -24,3 +24,6 @@ Here is an example of a generated pokemon in the AI dex:
 ![](./figures/example.png)
 
 In the interface, there are 4 buttons. The "play sound" button plays 1 of 3 generated sounds for the generated pokemon, at random. "Generate New Pokemon" generates a new pokemon based on the input prompt in the text box on its right (input prompt is optional). The "previous" and "next" buttons allows the user to browse previously created pokemons.
+
+
+To run the AI Dex program, clone this repository and run the line "python src/main.py" from the Generative-AI-project directory in the terminal, after installing the required packages.
