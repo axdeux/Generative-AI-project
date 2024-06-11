@@ -37,7 +37,7 @@ def generate_audio(pipe, prompt, negative_prompt=None, generator=None):
         prompt=prompt,
         negative_prompt=negative_prompt,
         num_inference_steps=100,
-        audio_length_in_s=10.0,
+        audio_length_in_s=4.0,
         num_waveforms_per_prompt=3,
         generator=generator,
     ).audios
