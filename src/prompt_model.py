@@ -28,7 +28,7 @@ Type: This identifies the primary elemental attribute of the Pokémon, such as E
 Description: This section provides a brief narrative about the Pokémon, including its evolutionary information, its role or significance within the Pokémon world, and any notable characteristics or abilities it possesses. This helps in understanding the Pokémon's background and its capabilities.
 Real World Comparison: This is a one-word tag that draws a parallel between the Pokémon and a real-world animal or item. It helps to quickly associate the Pokémon's appearance or characteristics with something familiar, making it easier for someone unfamiliar with Pokémon to visualize and understand the creature.
 Visual Description: This detailed description focuses on the physical appearance of the Pokémon. It includes information about the Pokémon's color, body shape, and any distinctive features. This is particularly useful for artists or anyone trying to imagine or create a visual representation of the Pokémon. Should only contain keywords.
-Sound Prompt: Each Pokémon cry is distinct and characteristic, with a sound that matches its type and personality. The cry should have a unique pitch and tone, reflecting the Pokémon's physical traits and abilities, and be memorable and easily identifiable, evoking the essence of the Pokémon.
+Sound Prompt: Generate distinctive calls for a set of Pokémon, drawing inspiration from real-world counterparts and their characteristics. Each call should reflect the essence and unique traits of the respective Pokémon, evoking their personality and abilities. Consider real-world sounds associated with animals or elements closely related to each Pokémon's design and behavior. Ensure that the generated calls capture the imagination and essence of these iconic creatures.
 
 Examples of already existing pokemon. Use | to separate the categories for the output formating.
 Name: Squirtle
@@ -36,36 +36,35 @@ Name: Squirtle
 |Description: Squirtle is a Water-type Pokémon that resembles a small turtle. It can evolve into Wartortle and eventually into Blastoise, gaining more power and bulk with each evolution.
 |Real World Comparison: Turtle
 |Visual Description Keywords: smooth blue skin, cream underside, dark blue shell, large eyes, smiling mouth, small curly tail
-|Sound Prompt: A deep, resonant cry with a telepathic quality, metallic echo, mysterious and powerful, emphasizing its psychic abilities and formidable presence.
-
+|Sound Prompt: Take inspiration from the high-pitched, gentle hiss and bubbly bursts of a turtle. Create a call that reflects playfulness and energy.
 
 Name: Mewtwo
 |Type: Psychic
 |Description: Mewtwo is a legendary Psychic-type Pokémon created from the DNA of Mew, one of the rarest Pokémon. It is known for its incredible psychic abilities and is often regarded as one of the most powerful Pokémon.
 |Real World Comparison: Feline
 |Visual Description Keywords: sleek humanoid body, pale purple fur, bright purple eyes, long thin tail, muscular, streamlined
-|Sound Prompt: A deep, roaring sound akin to a cannon firing, powerful and intimidating, reflecting its rugged strength and water cannons.
+|Sound Prompt: Imagine a sound reminiscent of a powerful psychic force. Incorporate elements of deep resonance and otherworldly echoes to capture Mewtwo's enigmatic nature.
 
 Name: Blastoise
 |Type: Water
 |Description: Blastoise is the final evolutionary stage of Squirtle, following Wartortle. Known for the powerful water cannons on its back, Blastoise can shoot water with enough force to penetrate steel.
 |Real World Comparison: Tortoise
 |Visual Description Keywords: large bipedal turtle, massive blue shell, water cannons, rugged blue body, small brown eyes, serious expression
-|Signature Cry: Blastoise has a deep, roaring cry, similar to the sound of a cannon firing, which is intimidating and powerful.
+|Signature call: Draw from the booming sound of a water cannon or the deep rumble of a large reptile. Emphasize strength and authority in the call.
 
 Name: Treecko
 |Type: Grass
 |Description: Treecko, a Grass-type Pokémon, is known for its cool demeanor and is the first stage in its evolutionary line, leading to Grovyle and then Sceptile. It has abilities that allow it to scale vertical walls.
 |Real World Comparison: Gecko
 |Visual Description Keywords: small sleek, green, light underside, long curled tail, large yellow eyes, big feet
-|Sound Prompt: A sharp, quick chirping sound, alert and agile, capturing its swift movements and tree-climbing abilities, reflecting its keen and nimble nature.
+|Sound Prompt: Think about the chirps and chatters of agile lizards in the wild. Craft a call that evokes agility and nimbleness, perhaps with a touch of curiosity.
 
 Name: Rayquaza
 |Type: Dragon / Flying
 |Description: Rayquaza is a legendary Pokémon that is part of the weather trio, along with Kyogre and Groudon. It has the ability to calm the other two members of the trio. It is known for living in the ozone layer and rarely descending to the ground.
 |Real World Comparison: Serpent
 |Visual Description Keywords: long serpentine body, green scales, yellow patterns, sharp red eyes, fins along body, majestic, fearsome.
-|Sound Prompt: A majestic, echoing roar, powerful and resonating through the skies, capturing its legendary status and serpentine form, conveying both awe and fear.
+|Sound Prompt: Consider the majestic roar of a dragon or the howl of a mighty wind. Create a call that echoes the grandeur and power of this legendary Pokémon.
 
 Please define the pokemon from the following user provided input: {User_description}. If blank, make up a new pokemon.
 
@@ -101,8 +100,8 @@ def generate_prompt(prompt):
     Description = suggestion[2].split(":")[1].strip()
     Real_World_Comparison = suggestion[3].split(":")[1].strip()
     Visual_Description = suggestion[4].split(":")[1].strip()
-    Signature_Cry = suggestion[5].split(":")[1].strip()
+    Signature_call = suggestion[5].split(":")[1].strip()
 
     del chain
 
-    return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_Cry
+    return Name, Type, Description, Real_World_Comparison, Visual_Description, Signature_call
